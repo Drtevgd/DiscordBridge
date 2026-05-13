@@ -244,7 +244,7 @@ bot.on("interactionCreate", async (interaction) => {
 const pendingScreenshots = new Map();
 
 // ACore опрашивает этот endpoint чтобы узнать — нужен ли скрин конкретному игроку
-app.get("/pending-screenshot/:steamId", (req, res) => {
+app.get("/pending-screenshot/:steamId", authMiddleware, (req, res) => {
   const key = BigInt(req.params.steamId);
   if (pendingScreenshots.has(key)) {
     const channelId = pendingScreenshots.get(key);
